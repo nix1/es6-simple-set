@@ -1,0 +1,28 @@
+{
+  "name": "es6-primitive-set",
+  "version": "1.0.0",
+  "description": "Incomplete yet light and simple polyfill for ES6 Set",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --compilers js:babel-register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nix1/es6-primitive-set.git"
+  },
+  "author": "Paweł Sierszeń",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nix1/es6-primitive-set/issues"
+  },
+  "homepage": "https://github.com/nix1/es6-primitive-set",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.9.0",
+    "babel-register": "^6.9.0",
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  },
+  "babel": {
+    "presets": ["es2015"]
+  }
+}

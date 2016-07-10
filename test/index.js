@@ -1,5 +1,7 @@
 import { expect } from 'chai';
 import S from '../index';
+// import S from '../dist/simple-set';
+// import S from '../dist/simple-set.min';
 
 const methods = ['add', 'has', 'clear', 'forEach', 'values', 'entries'];
 

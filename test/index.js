@@ -1,10 +1,26 @@
 import { expect } from 'chai';
 import S from '../index';
 
+const methods = ['add', 'has', 'clear', 'forEach', 'values', 'entries'];
+
 describe("SimpleSet", function() {
     describe("constructor", function () {
         it("should have 0 length", function () {
             expect(S.length).to.equal(0);
+        });
+        it("should have expected methods in the proto", function () {
+            methods.forEach(name => {
+               expect(typeof Set.prototype[name]).to.equal('function');
+            });
+        });
+        it("should use the prototype", function () {
+            const s = new S();
+            methods.forEach(name => {
+                expect(typeof s[name]).to.equal('function');
+            });
+        });
+        it("should keep its constructor", function () {
+            expect(new S().constructor.name).to.equal('Set');
         });
         it("should set proper size", function () {
             expect(new S().size).to.equal(0);

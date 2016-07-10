@@ -17,6 +17,7 @@ export default function Set(values = []) {
 }
 
 Set.prototype = [];
+Set.prototype.constructor = Set;
 
 /**
  * Append a new value to the set.

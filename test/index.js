@@ -12,6 +12,9 @@ describe("SimpleSet", function() {
             expect(new S(["a", "b", "c"]).size).to.equal(3);
             expect(new S(["a", "b", "b", "c"]).size).to.equal(3);
         });
+        it("should throw TypeError if called without new", function() {
+           expect(() => S()).to.throw(TypeError);
+        });
     });
 
     describe("instance", function () {
@@ -46,28 +49,40 @@ describe("SimpleSet", function() {
             this.s.add('first');
             expect(this.s.size).to.equal(1);
         });
-        it("should loop (forEach)", function () {
-            this.s.forEach(function (key, value) {
-                expect(this.size).to.equal(2);
-                expect(key).to.be.oneOf(['first', 'second']);
-                expect(value).to.be.oneOf(['first', 'second']);
+        it("should loop (forEach)", function() {
+            let expected = [];
+            this.s.forEach(function(key, value) {
+                expected.push([this.size, key, value]);
             });
+            expect(expected).to.deep.equal([
+                [2, 'first', 'first'],
+                [2, 'second', 'second']
+            ]);
         });
-        it("should bind forEach", function () {
-            this.s.forEach(function (key, value) {
+        it("should bind forEach", function() {
+            this.s.forEach(function(key, value) {
                 expect(this.hello).to.equal('world');
                 expect(key).to.be.oneOf(['first', 'second']);
                 expect(value).to.be.oneOf(['first', 'second']);
             }, {hello: 'world'});
         });
-        it("should delete values", function () {
+        it("should delete values", function() {
             expect(this.s.values()).to.deep.equal(['first', 'second']);
+            expect(this.s.size).to.equal(2);
             expect(this.s.delete('kthxbai')).to.equal(false);
             expect(this.s.values()).to.deep.equal(['first', 'second']);
+            expect(this.s.size).to.equal(2);
             expect(this.s.delete('first')).to.equal(true);
             expect(this.s.values()).to.deep.equal(['second']);
+            expect(this.s.size).to.equal(1);
         });
-        it("should work with Array.from", function () {
+        it("should return entries", function() {
+            expect(this.s.entries()).to.deep.equal([
+                ['first', 'first'],
+                ['second', 'second']
+            ]);
+        });
+        it("should work with Array.from", function() {
             const arr = Array.from(this.s);
             expect(arr).to.deep.equal(this.s.values());
         });
